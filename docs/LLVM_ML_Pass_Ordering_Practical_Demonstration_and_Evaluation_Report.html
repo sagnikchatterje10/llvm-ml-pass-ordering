@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LLVM ML Pass Optimization - 70% Milestone Comprehensive Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page);
+        font-size: 9pt;
+        color: #64748b;
+      }
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #0f172a;
+      line-height: 1.5;
+      font-size: 10pt;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .cover {
+      page-break-after: always;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #e0f2fe;
+      color: #0369a1;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24pt;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 10px 0 15px 0;
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 13pt;
+      color: #475569;
+      max-width: 650px;
+      margin: 0 auto 30px auto;
+    }
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto 30px auto;
+      text-align: left;
+      font-size: 9.5pt;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+    .meta-row:last-child { border-bottom: none; }
+    .meta-label { font-weight: 600; color: #64748b; }
+    .meta-val { font-weight: 600; color: #0f172a; }
+
+    h2 {
+      font-size: 15pt;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 5px;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: #0369a1;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+    }
+    p { margin-bottom: 10px; }
+    ul, ol { margin-top: 4px; margin-bottom: 10px; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    
+    .kpi-container {
+      display: flex;
+      gap: 12px;
+      margin: 15px 0 20px 0;
+    }
+    .kpi-card {
+      flex: 1;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    .kpi-val {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0284c7;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .kpi-label {
+      font-size: 8pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #475569;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 8.5pt;
+    }
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
+      padding: 7px 9px;
+      text-align: left;
+    }
+    td {
+      padding: 6px 9px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    tr:nth-child(even) { background: #f8fafc; }
+    
+    .code-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 8.5pt;
+      margin: 8px 0 12px 0;
+      overflow-x: auto;
+      line-height: 1.4;
+    }
+    .callout {
+      background: #f8fafc;
+      border-left: 4px solid #0284c7;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 9pt;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout-success {
+      background: #f0fdf4;
+      border-left-color: #16a34a;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 7.5pt;
+      font-weight: 700;
+    }
+    .tag-win { background: #dcfce7; color: #15803d; }
+    .tag-tie { background: #e0f2fe; color: #0369a1; }
+    .page-break { page-break-before: always; }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover">
+    <div class="badge">Compiler Design Project — 70% Milestone Specification</div>
+    <h1>ML-Based LLVM Optimization Pass Ordering & Selection</h1>
+    <div class="subtitle">
+      Automated Static Feature Extraction, Limited-Budget Empirical Profiling, Supervised Pass Sequence Prediction, and Empirical Evaluation against LLVM -O2 and -Oz
+    </div>
+
+    <div class="meta-box">
+      <div class="meta-row">
+        <span class="meta-label">Project Domain:</span>
+        <span class="meta-val">Compiler Design & Machine Learning (LLVM)</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Primary Metric:</span>
+        <span class="meta-val">Code Size (.text section bytes)</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Toolchain:</span>
+        <span class="meta-val">LLVM 23.1.2 / Clang / llvm-size / Python 3.12</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Implementation Status:</span>
+        <span class="meta-val">70% Milestone Fully Executed & Verified</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Cloud CI/CD:</span>
+        <span class="meta-val">GitHub Actions (Passing / Green Checkmark)</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Repository:</span>
+        <span class="meta-val">github.com/sagnikchatterje10/llvm-ml-pass-ordering</span>
+      </div>
+    </div>
+
+    <div class="kpi-container">
+      <div class="kpi-card">
+        <div class="kpi-val">+10.36%</div>
+        <div class="kpi-label">Average Code Size Reduction vs -O2 / -Oz</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">+45.60%</div>
+        <div class="kpi-label">Peak Single Program Win (conv2d)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">100%</div>
+        <div class="kpi-label">Win / Tie Rate (Zero Regressions)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">4.27%</div>
+        <div class="kpi-label">Average Distance to Theoretical Oracle</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: EXECUTIVE SUMMARY -->
+  <h2>1. Executive Summary: What We Convey Through the First 70%</h2>
+  <p>
+    Modern optimizing compilers such as LLVM/Clang rely on dozens of discrete transformation passes (e.g., dead code elimination, constant propagation, loop unrolling, instruction combining). Conventionally, software engineers invoke high-level compiler flags such as <code>-O2</code> (optimizing for runtime speed) or <code>-Oz</code> (optimizing for minimal code size).
+  </p>
+  <p>
+    <strong>The Core Problem (Phase Ordering):</strong> Compilers use a single, hardcoded, one-size-fits-all pass sequence for every program. However, code transformations interact non-linearly: an optimization pass can create or destroy opportunities for subsequent passes. Consequently, a pass sequence that shrinks matrix multiplication can severely <em>bloat</em> an image convolution or a state-machine routine. Searching the entire space of pass permutations at compile time is computationally intractable (NP-hard).
+  </p>
+  <div class="callout callout-success">
+    <strong>The Core Project Thesis (70% Deliverable):</strong>
+    By inspecting the static structural "DNA" of a program's LLVM Intermediate Representation (IR)—measuring instruction mix, control-flow branching, memory operations, and loop characteristics—a lightweight Machine Learning classifier can predict a custom, short optimization pass sequence tailored to that specific program. This predicted sequence outperforms LLVM's official <code>-O2</code> and <code>-Oz</code> flags in code size under a strictly constrained compilation budget, with near-zero inference latency (17–45 ms).
+  </div>
+
+  <!-- SECTION 2: COMPARATIVE ANALYSIS -->
+  <h2>2. Benefits of Our Approach Compared to Prior / Traditional Methods</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Evaluation Dimension</th>
+        <th>Traditional Heuristics (-O2 / -Oz)</th>
+        <th>Search-Based Autotuning (Genetic / Iterative)</th>
+        <th>Our Approach (Static ML Pass Selection)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Adaptability to Program Structure</strong></td>
+        <td>None (Static, fixed pipeline for all C code)</td>
+        <td>High (Explores program-specific space)</td>
+        <td><strong>High (Predicts sequence conditioned on IR features)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Compilation Overhead</strong></td>
+        <td>Low (Single pass pipeline)</td>
+        <td>Extremely High (Compiles 500–5000+ times per file)</td>
+        <td><strong>Ultra-Low (Single inference in ~20 ms + single compile)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Code Size vs -O2 / -Oz</strong></td>
+        <td>Baseline (0.0% by definition)</td>
+        <td>+10% to +15% reduction (after hours of search)</td>
+        <td><strong>+10.36% average reduction (instantaneous)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Feasibility in Production CI/CD</strong></td>
+        <td>High</td>
+        <td>Zero (Prohibitive build times)</td>
+        <td><strong>High (Integrated directly into build scripts)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Model Interpretability</strong></td>
+        <td>N/A (Hand-crafted C++ heuristics)</td>
+        <td>Black-box search history</td>
+        <td><strong>High (Feature importance ranks IR branch/memory ratios)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Hardware Requirement</strong></td>
+        <td>CPU</td>
+        <td>Massive compute clusters</td>
+        <td><strong>Standard CPU (Trains in &lt;1s on Random Forest)</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Key Architectural Advantages Demonstrated:</h3>
+  <ol>
+    <li><strong>Zero Runtime Search Penalty:</strong> Unlike genetic algorithms that require re-compiling a program hundreds of times, our model makes a deterministic classification in under 45 milliseconds.</li>
+    <li><strong>Prevention of Destructive Optimizations:</strong> Standard <code>-O2</code>/<code>-Oz</code> flags frequently apply loop vectorization and unrolling heuristics that duplicate instructions. Our ML model identifies small loop bodies and selects minimalist simplification pipelines (e.g., <code>simplifycfg, instcombine</code>), eliminating 45.6% of binary bloat.</li>
+    <li><strong>Guaranteed Leakage-Free Evaluation:</strong> Unlike naive ML benchmarks that split rows randomly, we enforce strict program-level partitioning: training, validation, and testing share zero source files.</li>
+  </ol>
+
+  <!-- PAGE BREAK FOR DEMO WALKTHROUGH -->
+  <div class="page-break"></div>
+
+  <h2>3. Practical Demonstrations: Step-by-Step System Walkthrough</h2>
+  <p>
+    The system is fully implemented and executable. The table below details what is demonstrated at each stage of the pipeline, the exact commands executed, and the physical outputs verified.
+  </p>
+
+  <h3>Step 1: Environment & Toolchain Diagnostics</h3>
+  <div class="code-block">python scripts/check_environment.py</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> Verifies Python 3.12, scikit-learn, pandas, numpy, and autodetects the LLVM toolchain (Clang 23.1.2 and llvm-size). Generates <code>experiments/environment_manifest.json</code>.</li>
+    <li><strong>Key Technical Innovation:</strong> Handles modern LLVM 23 architectures that omit standalone <code>opt.exe</code> by orchestrating optimization passes through Clang's internal pass manager and cross-platform header resolvers.</li>
+  </ul>
+
+  <h3>Step 2: Benchmark Suite & Zero-Leakage Dataset Splitting</h3>
+  <div class="code-block">cat benchmarks/metadata/manifest.json</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> 40 diverse C benchmarks across 9 distinct algorithmic categories: <em>arrays_loops, sorting, searching, recursion, arithmetic, bitwise_logic, string_processing, memory_structures, and control_flow</em>.</li>
+    <li><strong>Partitioning:</strong> 27 Train (67.5%), 6 Validation (15%), 7 Held-Out Test (17.5%). Programs are partitioned at the file level so test code is completely unseen.</li>
+  </ul>
+
+  <h3>Step 3: Automated LLVM IR Generation</h3>
+  <div class="code-block">python scripts/build_ir.py</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> Compiles all 40 C files into clean LLVM Intermediate Representation (<code>ir/*.ll</code>).</li>
+    <li><strong>Critical Implementation Requirement:</strong> Applies <code>-Xclang -disable-O0-optnone</code>. Without this flag, Clang tags functions with <code>optnone</code>, which silently prevents subsequent optimization passes from executing.</li>
+  </ul>
+
+  <h3>Step 4: Deterministic 30-Feature IR Extraction</h3>
+  <div class="code-block">python scripts/extract_features.py</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> Parses the LLVM IR grammar and extracts 30 static numerical features across:
+      <ul>
+        <li><strong>Program Size:</strong> Instruction count, basic block count, function count.</li>
+        <li><strong>Control Flow:</strong> Unconditional/conditional branches, switches, branch-to-instruction ratio.</li>
+        <li><strong>Memory:</strong> Load, store, alloca, getelementptr (GEP) counts and load/instruction ratios.</li>
+        <li><strong>Computation:</strong> Integer/floating-point arithmetic, bitwise operators, comparisons.</li>
+        <li><strong>SSA & Normalization:</strong> PHI nodes, select instructions, instructions per basic block.</li>
+      </ul>
+    </li>
+    <li><strong>Output:</strong> Generates <code>features/ir_features.csv</code> (40 rows &times; 30 deterministic feature columns).</li>
+  </ul>
+
+  <h3>Step 5: Candidate Pass Sequences & Limited-Budget Profiling</h3>
+  <div class="code-block">python scripts/run_experiments.py --split all --budget 30</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> Evaluates 42 candidate pipelines (Baselines <code>O2</code>, <code>OZ</code>, and candidate sequences <code>S01</code>–<code>S40</code>) using safe optimization passes (<code>instcombine, simplifycfg, sroa, dce, gvn, sccp, licm, mem2reg</code>).</li>
+    <li><strong>Budget Constraint:</strong> Limits sequence evaluations to at most 30 per program to avoid combinatorial explosion. Evaluates 1,280 compilations using 12 parallel threads with thread-safe disk caching in <code>experiments/results_cache.json</code>.</li>
+  </ul>
+
+  <!-- PAGE BREAK FOR RESULTS -->
+  <div class="page-break"></div>
+
+  <h3>Step 6: Supervised Model Training & Feature Importance</h3>
+  <div class="code-block">python scripts/train_model.py --model all</div>
+  <ul>
+    <li><strong>What the Demonstration Shows:</strong> Merges features and empirical winning labels into <code>dataset/dataset_train.csv</code> and <code>dataset_test.csv</code>. Trains both a <strong>Random Forest Classifier</strong> and a <strong>HistGradientBoosting Classifier</strong>.</li>
+    <li><strong>Results:</strong> Random Forest achieves 100% training accuracy and 57.1% top-3 test accuracy. Models are serialized to <code>models/random_forest_pass_predictor.joblib</code>.</li>
+  </ul>
+
+  <h3>Step 7: Live Single-Program Inference Demonstration</h3>
+  <div class="code-block">python scripts/predict.py --source benchmarks/test/PG005_conv2d.c</div>
+  <ul>
+    <li><strong>Live Output Displayed:</strong>
+      <div class="code-block">
+=================================================================
+LLVM ML OPTIMIZATION PREDICTION PIPELINE: PG005_conv2d.c
+=================================================================
+Step 1: Generated LLVM IR -> (1067.3 ms)
+Step 2: Extracted 30 static IR features (0.7 ms)
+        Instructions: 139, Blocks: 24, Branches: 24, Loads/Stores: 32/20
+Step 3: ML Model Inference (17.60 ms)
+        Predicted Best Sequence : S02 (simplifycfg,instcombine)
+=================================================================
+ML Code Size            : 346 bytes
+LLVM -O2 Baseline       : 636 bytes
+LLVM -Oz Baseline       : 636 bytes
+-----------------------------------------------------------------
+ML vs LLVM -O2          : +45.60% size reduction (+290 bytes)
+ML vs LLVM -Oz          : +45.60% size reduction (+290 bytes)
+Outcome Verdict         : WIN (ML produced smaller code than BOTH!)
+=================================================================
+      </div>
+    </li>
+  </ul>
+
+  <h3>Step 8: Full Test Suite Evaluation (Held-Out Benchmark Table)</h3>
+  <div class="code-block">python scripts/evaluate.py</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Program ID</th>
+        <th>Benchmark Name</th>
+        <th>Category</th>
+        <th>-O2 (B)</th>
+        <th>-Oz (B)</th>
+        <th>ML Predicted (B)</th>
+        <th>Oracle (B)</th>
+        <th>Predicted Pass</th>
+        <th>Reduction vs -O2</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PG005</strong></td>
+        <td>conv2d</td>
+        <td>arrays_loops</td>
+        <td>636</td>
+        <td>636</td>
+        <td><strong>346</strong></td>
+        <td>346</td>
+        <td><code>S02</code></td>
+        <td>+45.60%</td>
+        <td><span class="tag tag-win">WIN</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG010</strong></td>
+        <td>quicksort</td>
+        <td>sorting</td>
+        <td>315</td>
+        <td>315</td>
+        <td><strong>315</strong></td>
+        <td>315</td>
+        <td><code>S16</code></td>
+        <td>0.00%</td>
+        <td><span class="tag tag-tie">TIED</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG015</strong></td>
+        <td>tree_traverse</td>
+        <td>recursion</td>
+        <td>102</td>
+        <td>102</td>
+        <td><strong>102</strong></td>
+        <td>102</td>
+        <td><code>S05</code></td>
+        <td>0.00%</td>
+        <td><span class="tag tag-tie">TIED</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG020</strong></td>
+        <td>horner_eval</td>
+        <td>arithmetic</td>
+        <td>256</td>
+        <td>256</td>
+        <td><strong>187</strong></td>
+        <td>144</td>
+        <td><code>S04</code></td>
+        <td>+26.95%</td>
+        <td><span class="tag tag-win">WIN</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG026</strong></td>
+        <td>str_search</td>
+        <td>strings</td>
+        <td>145</td>
+        <td>145</td>
+        <td><strong>145</strong></td>
+        <td>145</td>
+        <td><code>S05</code></td>
+        <td>0.00%</td>
+        <td><span class="tag tag-tie">TIED</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG035</strong></td>
+        <td>decision_tree</td>
+        <td>control_flow</td>
+        <td>160</td>
+        <td>160</td>
+        <td><strong>160</strong></td>
+        <td>160</td>
+        <td><code>S04</code></td>
+        <td>0.00%</td>
+        <td><span class="tag tag-tie">TIED</span></td>
+      </tr>
+      <tr>
+        <td><strong>PG040</strong></td>
+        <td>knapsack</td>
+        <td>mixed_comp</td>
+        <td>294</td>
+        <td>294</td>
+        <td><strong>294</strong></td>
+        <td>294</td>
+        <td><code>S02</code></td>
+        <td>0.00%</td>
+        <td><span class="tag tag-tie">TIED</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PAGE BREAK FOR PRESENTATION CHECKLIST -->
+  <div class="page-break"></div>
+
+  <h2>4. Checklist of Items to Present During Evaluation / Viva</h2>
+  <ol>
+    <li>
+      <strong>Live Terminal Execution:</strong> Run <code>python scripts/predict.py --source benchmarks/test/PG005_conv2d.c</code> in the integrated terminal to demonstrate live, un-faked compiler invocation.
+    </li>
+    <li>
+      <strong>Interactive Web Dashboard:</strong> Open <code>results/dashboard.html</code> in the web browser. Show the bar chart contrasting ML vs <code>-O2</code>/<code>-Oz</code>, the donut breakdown, and the metric cards.
+    </li>
+    <li>
+      <strong>Research Visualizations:</strong> Open the images in <code>results/plots/</code>:
+      <ul>
+        <li><code>per_program_comparison.png</code> — Per-benchmark comparative bar chart.</li>
+        <li><code>feature_importance.png</code> — Top features utilized by the model (e.g., branch frequency, memory load ratio).</li>
+        <li><code>ml_wins_breakdown.png</code> — 100% win/tie proportion with zero regressions.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Automated Unit Test Suite:</strong> Run <code>python scripts/run_tests.py</code> to show all 5 unit tests passing (verifying zero data leakage, feature extraction validity, and candidate syntax).
+    </li>
+    <li>
+      <strong>Public GitHub Repository & Green Cloud CI/CD:</strong> Show <code>https://github.com/sagnikchatterje10/llvm-ml-pass-ordering</code> and the GitHub Actions tab showing green passing checks on Ubuntu runners.
+    </li>
+  </ol>
+
+  <h2>5. Roadmap for the Remaining 30% Milestone</h2>
+  <ul>
+    <li><strong>Pass Pipeline Expansion:</strong> Expand short pipelines (2–4 passes) to deeper sequences (5–8 passes) with loop-invariant code motion (LICM) and scalar replacement of aggregates (SROA).</li>
+    <li><strong>Multi-Objective Pareto Optimization:</strong> Optimize simultaneously for binary size (.text bytes) and runtime execution latency (cycle count via cycle timers).</li>
+    <li><strong>Dynamic Feature Integration:</strong> Combine static IR opcode counts with basic-block execution frequency profiles collected from sample execution traces.</li>
+  </ul>
+
+</body>
+</html>
