@@ -1,0 +1,322 @@
+[
+  {
+    "program_id": "PG001",
+    "name": "vec_dot",
+    "category": "arrays_loops",
+    "split": "train",
+    "source_file": "benchmarks/train/PG001_vec_dot.c",
+    "description": "Vector dot product with accumulation and stride"
+  },
+  {
+    "program_id": "PG002",
+    "name": "matrix_mult",
+    "category": "arrays_loops",
+    "split": "train",
+    "source_file": "benchmarks/train/PG002_matrix_mult.c",
+    "description": "2D Square Matrix multiplication with nested triple loops"
+  },
+  {
+    "program_id": "PG003",
+    "name": "prefix_sum",
+    "category": "arrays_loops",
+    "split": "train",
+    "source_file": "benchmarks/train/PG003_prefix_sum.c",
+    "description": "Array prefix sum (scan) with in-place bounds checking"
+  },
+  {
+    "program_id": "PG004",
+    "name": "array_rotate",
+    "category": "arrays_loops",
+    "split": "train",
+    "source_file": "benchmarks/train/PG004_array_rotate.c",
+    "description": "Array block reversal and cyclic rotation"
+  },
+  {
+    "program_id": "PG005",
+    "name": "conv2d",
+    "category": "arrays_loops",
+    "split": "test",
+    "source_file": "benchmarks/test/PG005_conv2d.c",
+    "description": "2D Image convolution kernel filtering with edge clamping"
+  },
+  {
+    "program_id": "PG006",
+    "name": "bubble_sort",
+    "category": "sorting_searching",
+    "split": "train",
+    "source_file": "benchmarks/train/PG006_bubble_sort.c",
+    "description": "Bubble sort with early exit flag and element swap"
+  },
+  {
+    "program_id": "PG007",
+    "name": "insertion_sort",
+    "category": "sorting_searching",
+    "split": "train",
+    "source_file": "benchmarks/train/PG007_insertion_sort.c",
+    "description": "Insertion sort algorithm shifting elements"
+  },
+  {
+    "program_id": "PG008",
+    "name": "selection_sort",
+    "category": "sorting_searching",
+    "split": "train",
+    "source_file": "benchmarks/train/PG008_selection_sort.c",
+    "description": "Selection sort finding minimum index each pass"
+  },
+  {
+    "program_id": "PG009",
+    "name": "binary_search",
+    "category": "sorting_searching",
+    "split": "train",
+    "source_file": "benchmarks/train/PG009_binary_search.c",
+    "description": "Iterative binary search with conditional midpoint updates"
+  },
+  {
+    "program_id": "PG010",
+    "name": "quicksort",
+    "category": "sorting_searching",
+    "split": "test",
+    "source_file": "benchmarks/test/PG010_quicksort.c",
+    "description": "Recursive QuickSort with Lomuto partition scheme"
+  },
+  {
+    "program_id": "PG011",
+    "name": "fib_recursive",
+    "category": "recursion",
+    "split": "train",
+    "source_file": "benchmarks/train/PG011_fib_recursive.c",
+    "description": "Recursive Fibonacci with base conditions"
+  },
+  {
+    "program_id": "PG012",
+    "name": "factorial",
+    "category": "recursion",
+    "split": "train",
+    "source_file": "benchmarks/train/PG012_factorial.c",
+    "description": "Recursive factorial calculation"
+  },
+  {
+    "program_id": "PG013",
+    "name": "hanoi",
+    "category": "recursion",
+    "split": "train",
+    "source_file": "benchmarks/train/PG013_hanoi.c",
+    "description": "Towers of Hanoi move counter recursion"
+  },
+  {
+    "program_id": "PG014",
+    "name": "ackermann",
+    "category": "recursion",
+    "split": "train",
+    "source_file": "benchmarks/train/PG014_ackermann.c",
+    "description": "Ackermann-Peter recursive function"
+  },
+  {
+    "program_id": "PG015",
+    "name": "tree_traverse",
+    "category": "recursion",
+    "split": "test",
+    "source_file": "benchmarks/test/PG015_tree_traverse.c",
+    "description": "Recursive binary tree depth-first sum and height"
+  },
+  {
+    "program_id": "PG016",
+    "name": "fast_power",
+    "category": "arithmetic_math",
+    "split": "train",
+    "source_file": "benchmarks/train/PG016_fast_power.c",
+    "description": "Binary modular exponentiation (fast power)"
+  },
+  {
+    "program_id": "PG017",
+    "name": "gcd_lcm",
+    "category": "arithmetic_math",
+    "split": "train",
+    "source_file": "benchmarks/train/PG017_gcd_lcm.c",
+    "description": "Euclidean GCD and LCM calculation"
+  },
+  {
+    "program_id": "PG018",
+    "name": "sieve",
+    "category": "arithmetic_math",
+    "split": "train",
+    "source_file": "benchmarks/train/PG018_sieve.c",
+    "description": "Sieve of Eratosthenes prime counter"
+  },
+  {
+    "program_id": "PG019",
+    "name": "sqrt_newton",
+    "category": "arithmetic_math",
+    "split": "train",
+    "source_file": "benchmarks/train/PG019_sqrt_newton.c",
+    "description": "Floating-point Newton-Raphson square root method"
+  },
+  {
+    "program_id": "PG020",
+    "name": "horner_eval",
+    "category": "arithmetic_math",
+    "split": "test",
+    "source_file": "benchmarks/test/PG020_horner_eval.c",
+    "description": "Polynomial evaluation using Horner's rule"
+  },
+  {
+    "program_id": "PG021",
+    "name": "popcount",
+    "category": "bitwise_logic",
+    "split": "train",
+    "source_file": "benchmarks/train/PG021_popcount.c",
+    "description": "Branchless parallel bit counting / population count"
+  },
+  {
+    "program_id": "PG022",
+    "name": "crc32",
+    "category": "bitwise_logic",
+    "split": "train",
+    "source_file": "benchmarks/train/PG022_crc32.c",
+    "description": "Bitwise CRC32 calculation kernel"
+  },
+  {
+    "program_id": "PG023",
+    "name": "bit_reverse",
+    "category": "bitwise_logic",
+    "split": "train",
+    "source_file": "benchmarks/train/PG023_bit_reverse.c",
+    "description": "Reversal of bits in 32-bit unsigned integer"
+  },
+  {
+    "program_id": "PG024",
+    "name": "lfsr_prng",
+    "category": "bitwise_logic",
+    "split": "train",
+    "source_file": "benchmarks/train/PG024_lfsr_prng.c",
+    "description": "Linear Feedback Shift Register pseudo-random sequence"
+  },
+  {
+    "program_id": "PG025",
+    "name": "string_ops",
+    "category": "strings_pointers",
+    "split": "train",
+    "source_file": "benchmarks/train/PG025_string_ops.c",
+    "description": "Pointer-based string copy, length, and reverse"
+  },
+  {
+    "program_id": "PG026",
+    "name": "str_search",
+    "category": "strings_pointers",
+    "split": "test",
+    "source_file": "benchmarks/test/PG026_str_search.c",
+    "description": "Pointer-based naive substring search with offset returns"
+  },
+  {
+    "program_id": "PG027",
+    "name": "palindrome",
+    "category": "strings_pointers",
+    "split": "train",
+    "source_file": "benchmarks/train/PG027_palindrome.c",
+    "description": "Two-pointer bidirectional palindrome validator"
+  },
+  {
+    "program_id": "PG028",
+    "name": "run_length",
+    "category": "strings_pointers",
+    "split": "train",
+    "source_file": "benchmarks/train/PG028_run_length.c",
+    "description": "Run-length byte sequence encoder"
+  },
+  {
+    "program_id": "PG029",
+    "name": "linked_list",
+    "category": "memory_structs",
+    "split": "val",
+    "source_file": "benchmarks/val/PG029_linked_list.c",
+    "description": "Singly linked list node traversal and node filtering"
+  },
+  {
+    "program_id": "PG030",
+    "name": "ring_buffer",
+    "category": "memory_structs",
+    "split": "val",
+    "source_file": "benchmarks/val/PG030_ring_buffer.c",
+    "description": "Circular ring buffer push, pop, and status calculation"
+  },
+  {
+    "program_id": "PG031",
+    "name": "min_heap",
+    "category": "memory_structs",
+    "split": "val",
+    "source_file": "benchmarks/val/PG031_min_heap.c",
+    "description": "Min-heap priority queue sift up/down operations"
+  },
+  {
+    "program_id": "PG032",
+    "name": "struct_stats",
+    "category": "memory_structs",
+    "split": "val",
+    "source_file": "benchmarks/val/PG032_struct_stats.c",
+    "description": "Statistical summary across array of structures"
+  },
+  {
+    "program_id": "PG033",
+    "name": "state_machine",
+    "category": "control_flow_switch",
+    "split": "val",
+    "source_file": "benchmarks/val/PG033_state_machine.c",
+    "description": "Finite State Machine with transition table and switch dispatch"
+  },
+  {
+    "program_id": "PG034",
+    "name": "opcode_interpreter",
+    "category": "control_flow_switch",
+    "split": "val",
+    "source_file": "benchmarks/val/PG034_opcode_interpreter.c",
+    "description": "Bytecode VM opcode loop with jump switch statement"
+  },
+  {
+    "program_id": "PG035",
+    "name": "decision_tree",
+    "category": "control_flow_switch",
+    "split": "test",
+    "source_file": "benchmarks/test/PG035_decision_tree.c",
+    "description": "Deep nested conditional classification tree"
+  },
+  {
+    "program_id": "PG036",
+    "name": "collatz",
+    "category": "control_flow_switch",
+    "split": "train",
+    "source_file": "benchmarks/train/PG036_collatz.c",
+    "description": "Collatz sequence loop step counter with odd/even branching"
+  },
+  {
+    "program_id": "PG037",
+    "name": "cellular_automata",
+    "category": "mixed_computation",
+    "split": "train",
+    "source_file": "benchmarks/train/PG037_cellular_automata.c",
+    "description": "1D Wolfram Rule 30 cellular automaton evolution"
+  },
+  {
+    "program_id": "PG038",
+    "name": "runge_kutta",
+    "category": "mixed_computation",
+    "split": "train",
+    "source_file": "benchmarks/train/PG038_runge_kutta.c",
+    "description": "Runge-Kutta 2nd order numerical ODE integrator"
+  },
+  {
+    "program_id": "PG039",
+    "name": "hash_table",
+    "category": "mixed_computation",
+    "split": "train",
+    "source_file": "benchmarks/train/PG039_hash_table.c",
+    "description": "Open-addressing linear probing integer hash map"
+  },
+  {
+    "program_id": "PG040",
+    "name": "knapsack",
+    "category": "mixed_computation",
+    "split": "test",
+    "source_file": "benchmarks/test/PG040_knapsack.c",
+    "description": "0-1 Knapsack dynamic programming table solver"
+  }
+]

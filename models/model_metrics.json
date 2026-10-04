@@ -1,0 +1,655 @@
+{
+  "random_forest": {
+    "name": "Random Forest",
+    "train": {
+      "model_type": "random_forest",
+      "samples": 27,
+      "top1_accuracy": 1.0,
+      "top3_accuracy": 1.0,
+      "labels": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S16",
+        "S20"
+      ],
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      ],
+      "feature_importances": {
+        "arith_ratio": 0.0771,
+        "load_ratio": 0.064,
+        "calls": 0.0574,
+        "instructions": 0.0543,
+        "cond_branch_ratio": 0.0542,
+        "mem_ratio": 0.0541,
+        "call_ratio": 0.0537,
+        "store_ratio": 0.0503,
+        "int_arith": 0.0502,
+        "casts": 0.0477,
+        "stores": 0.0473,
+        "allocas": 0.046,
+        "branch_ratio": 0.0446,
+        "loads": 0.0418,
+        "instr_per_bb": 0.0357,
+        "basic_blocks": 0.0345,
+        "geps": 0.0278,
+        "cond_branches": 0.0258,
+        "branches": 0.0255,
+        "loop_backedges": 0.0216,
+        "uncond_branches": 0.0198,
+        "comparisons": 0.018,
+        "phi_ratio": 0.0129,
+        "functions": 0.0122,
+        "selects": 0.0121,
+        "phis": 0.0076,
+        "fp_arith": 0.0039,
+        "switches": 0.0,
+        "indirect_branches": 0.0,
+        "indirect_calls": 0.0
+      }
+    },
+    "val": {
+      "model_type": "random_forest",
+      "samples": 6,
+      "top1_accuracy": 0.0,
+      "top3_accuracy": 0.3333,
+      "labels": [
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08",
+        "S16"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "feature_importances": {
+        "arith_ratio": 0.0771,
+        "load_ratio": 0.064,
+        "calls": 0.0574,
+        "instructions": 0.0543,
+        "cond_branch_ratio": 0.0542,
+        "mem_ratio": 0.0541,
+        "call_ratio": 0.0537,
+        "store_ratio": 0.0503,
+        "int_arith": 0.0502,
+        "casts": 0.0477,
+        "stores": 0.0473,
+        "allocas": 0.046,
+        "branch_ratio": 0.0446,
+        "loads": 0.0418,
+        "instr_per_bb": 0.0357,
+        "basic_blocks": 0.0345,
+        "geps": 0.0278,
+        "cond_branches": 0.0258,
+        "branches": 0.0255,
+        "loop_backedges": 0.0216,
+        "uncond_branches": 0.0198,
+        "comparisons": 0.018,
+        "phi_ratio": 0.0129,
+        "functions": 0.0122,
+        "selects": 0.0121,
+        "phis": 0.0076,
+        "fp_arith": 0.0039,
+        "switches": 0.0,
+        "indirect_branches": 0.0,
+        "indirect_calls": 0.0
+      }
+    },
+    "test": {
+      "model_type": "random_forest",
+      "samples": 7,
+      "top1_accuracy": 0.4286,
+      "top3_accuracy": 0.5714,
+      "labels": [
+        "S01",
+        "S02",
+        "S04",
+        "S05",
+        "S16"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "feature_importances": {
+        "arith_ratio": 0.0771,
+        "load_ratio": 0.064,
+        "calls": 0.0574,
+        "instructions": 0.0543,
+        "cond_branch_ratio": 0.0542,
+        "mem_ratio": 0.0541,
+        "call_ratio": 0.0537,
+        "store_ratio": 0.0503,
+        "int_arith": 0.0502,
+        "casts": 0.0477,
+        "stores": 0.0473,
+        "allocas": 0.046,
+        "branch_ratio": 0.0446,
+        "loads": 0.0418,
+        "instr_per_bb": 0.0357,
+        "basic_blocks": 0.0345,
+        "geps": 0.0278,
+        "cond_branches": 0.0258,
+        "branches": 0.0255,
+        "loop_backedges": 0.0216,
+        "uncond_branches": 0.0198,
+        "comparisons": 0.018,
+        "phi_ratio": 0.0129,
+        "functions": 0.0122,
+        "selects": 0.0121,
+        "phis": 0.0076,
+        "fp_arith": 0.0039,
+        "switches": 0.0,
+        "indirect_branches": 0.0,
+        "indirect_calls": 0.0
+      }
+    },
+    "save_path": "models\\random_forest_pass_predictor.joblib"
+  },
+  "hist_gradient_boosting": {
+    "name": "HistGradientBoosting",
+    "train": {
+      "model_type": "hist_gradient_boosting",
+      "samples": 27,
+      "top1_accuracy": 0.1852,
+      "top3_accuracy": 0.4444,
+      "labels": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S16",
+        "S20"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "feature_importances": {}
+    },
+    "val": {
+      "model_type": "hist_gradient_boosting",
+      "samples": 6,
+      "top1_accuracy": 0.1667,
+      "top3_accuracy": 0.3333,
+      "labels": [
+        "S02",
+        "S03",
+        "S04",
+        "S06",
+        "S08"
+      ],
+      "confusion_matrix": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "feature_importances": {}
+    },
+    "test": {
+      "model_type": "hist_gradient_boosting",
+      "samples": 7,
+      "top1_accuracy": 0.0,
+      "top3_accuracy": 0.5714,
+      "labels": [
+        "S01",
+        "S02",
+        "S04",
+        "S05"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0
+        ]
+      ],
+      "feature_importances": {}
+    },
+    "save_path": "models\\hist_gradient_boosting_pass_predictor.joblib"
+  }
+}

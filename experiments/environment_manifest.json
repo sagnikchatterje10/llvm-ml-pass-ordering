@@ -1,0 +1,74 @@
+{
+  "python": {
+    "version": "3.12.2",
+    "version_info": [
+      3,
+      12,
+      2
+    ],
+    "compatible": true,
+    "packages": {
+      "numpy": {
+        "installed": true,
+        "version": "2.4.5"
+      },
+      "pandas": {
+        "installed": true,
+        "version": "3.0.3"
+      },
+      "scikit-learn": {
+        "installed": true,
+        "version": "1.8.0"
+      },
+      "scipy": {
+        "installed": true,
+        "version": "1.17.1"
+      },
+      "matplotlib": {
+        "installed": true,
+        "version": "3.10.9"
+      },
+      "seaborn": {
+        "installed": true,
+        "version": "0.13.2"
+      },
+      "PyYAML": {
+        "installed": true,
+        "version": "6.0.3"
+      },
+      "joblib": {
+        "installed": true,
+        "version": "1.5.3"
+      }
+    },
+    "all_packages_ok": true
+  },
+  "llvm": {
+    "tools": {
+      "clang": {
+        "available": true,
+        "path": "C:\\Program Files\\LLVM\\bin\\clang.exe",
+        "version": "clang version 23.1.2 (https://github.com/llvm/llvm-project 85ac560262434c9ccfc0c183ec22d4138ed647fb)"
+      },
+      "opt": {
+        "available": false,
+        "path": null,
+        "version": null
+      },
+      "llvm-size": {
+        "available": true,
+        "path": "C:\\Program Files\\LLVM\\bin\\llvm-size.exe",
+        "version": "C:\\Program Files\\LLVM\\bin\\llvm-size.exe"
+      },
+      "llvm-dis": {
+        "available": false,
+        "path": null,
+        "version": null
+      }
+    },
+    "all_required_present": true,
+    "llvm_version": "clang version 23.1.2 (https://github.com/llvm/llvm-project 85ac560262434c9ccfc0c183ec22d4138ed647fb)",
+    "new_pm_supported": false
+  },
+  "environment_ready": true
+}

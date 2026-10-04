@@ -1,0 +1,8 @@
+program_id,name,source_file,predicted_pass,oracle_pass,size_O2,size_Oz,size_ML,size_oracle,compile_time_ml_ms,diff_vs_O2,pct_vs_O2,diff_vs_Oz,pct_vs_Oz,oracle_gap,oracle_gap_pct
+PG005,PG005_conv2d,benchmarks/test/PG005_conv2d.c,S02,S04,636,636,346,346,7487.0,290,45.59748427672956,290,45.59748427672956,0,0.0
+PG010,PG010_quicksort,benchmarks/test/PG010_quicksort.c,S16,S01,315,315,315,315,7184.4,0,0.0,0,0.0,0,0.0
+PG015,PG015_tree_traverse,benchmarks/test/PG015_tree_traverse.c,S05,S05,102,102,102,102,7159.78,0,0.0,0,0.0,0,0.0
+PG020,PG020_horner_eval,benchmarks/test/PG020_horner_eval.c,S04,S05,256,256,187,144,7011.75,69,26.953125,69,26.953125,43,29.86111111111111
+PG026,PG026_str_search,benchmarks/test/PG026_str_search.c,S05,S05,145,145,145,145,7197.97,0,0.0,0,0.0,0,0.0
+PG035,PG035_decision_tree,benchmarks/test/PG035_decision_tree.c,S04,S04,160,160,160,160,7472.17,0,0.0,0,0.0,0,0.0
+PG040,PG040_knapsack,benchmarks/test/PG040_knapsack.c,S02,S05,294,294,294,294,6424.43,0,0.0,0,0.0,0,0.0

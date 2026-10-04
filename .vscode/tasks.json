@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "1. Run Prediction (PG005_conv2d)",
+            "type": "shell",
+            "command": "python scripts/predict.py --source benchmarks/test/PG005_conv2d.c",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        },
+        {
+            "label": "2. Evaluate All Test Benchmarks",
+            "type": "shell",
+            "command": "python scripts/evaluate.py",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        },
+        {
+            "label": "3. Run Automated Unit Tests",
+            "type": "shell",
+            "command": "python scripts/run_tests.py",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        },
+        {
+            "label": "4. Check Toolchain Environment",
+            "type": "shell",
+            "command": "python scripts/check_environment.py",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        }
+    ]
+}

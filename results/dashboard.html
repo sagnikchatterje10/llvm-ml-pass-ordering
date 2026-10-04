@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLVM ML Pass Optimization - Project Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 2rem; line-height: 1.5; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2.5rem; }
+    h1 { font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--accent); font-size: 1.1rem; font-weight: 500; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+    .metric-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .metric-title { font-size: 0.875rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .metric-value { font-size: 2.25rem; font-weight: 700; color: #fff; }
+    .metric-sub { font-size: 0.875rem; margin-top: 0.5rem; font-weight: 500; }
+    .text-green { color: var(--success); }
+    .text-blue { color: var(--accent); }
+    .text-yellow { color: var(--warning); }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .card-title { font-size: 1.25rem; margin-bottom: 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+    .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+    @media(max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: #0f172a; padding: 0.75rem 1rem; font-size: 0.875rem; color: var(--text-muted); border-bottom: 1px solid var(--card-border); }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--card-border); font-size: 0.9rem; }
+    tr:hover { background: #26334d; }
+    .badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-win { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-tie { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .chart-container { position: relative; height: 320px; width: 100%; }
+    .pipeline-steps { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .step-box { flex: 1; min-width: 180px; background: #0f172a; border: 1px solid var(--card-border); border-radius: 8px; padding: 1rem; text-align: center; }
+    .step-num { display: inline-block; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #000; font-weight: bold; font-size: 0.8rem; line-height: 24px; margin-bottom: 0.5rem; }
+    .step-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .step-desc { font-size: 0.75rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Compiler Design Project: ML-Based LLVM Pass Selection</h1>
+      <p class="subtitle">Empirical Evaluation Report & Interactive Dashboard</p>
+    </header>
+
+    <div class="pipeline-steps">
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div class="step-title">Source C Code</div>
+        <div class="step-desc">40 Diverse benchmarks across 9 categories</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div class="step-title">LLVM IR Gen</div>
+        <div class="step-desc">Clang frontend with -disable-O0-optnone</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div class="step-title">Feature Extraction</div>
+        <div class="step-desc">30 static features (loops, branches, memory)</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">4</div>
+        <div class="step-title">ML Inference</div>
+        <div class="step-desc">Random Forest predicts optimal pass sequence</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">5</div>
+        <div class="step-title">Code Size Win</div>
+        <div class="step-desc">+10.36% smaller than -O2 and -Oz on average</div>
+      </div>
+    </div>
+
+    <!-- Metrics KPI Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-title">Average Size Reduction</div>
+        <div class="metric-value text-green">+10.36%</div>
+        <div class="metric-sub text-muted">vs LLVM -O2 & -Oz baselines</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Max Single Reduction</div>
+        <div class="metric-value text-green">+45.60%</div>
+        <div class="metric-sub text-muted">PG005 conv2d (346B vs 636B)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Win / Tie Rate</div>
+        <div class="metric-value text-blue">100%</div>
+        <div class="metric-sub text-muted">2 Wins, 5 Ties, 0 Regressions</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Oracle Gap</div>
+        <div class="metric-value text-yellow">4.27%</div>
+        <div class="metric-sub text-muted">From theoretical best possible</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 Code Size Comparison Across Held-Out Test Suite (.text Bytes)</div>
+        <div class="chart-container">
+          <canvas id="sizeChart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🏆 Outcome Breakdown vs -O2 / -Oz</div>
+        <div class="chart-container">
+          <canvas id="winChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Evaluation Table -->
+    <div class="card">
+      <div class="card-title">📋 Held-Out Test Programs: Full Measurement Details</div>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Benchmark</th>
+              <th>Predicted Pass</th>
+              <th>LLVM -O2</th>
+              <th>LLVM -Oz</th>
+              <th>ML Predicted</th>
+              <th>Oracle (Best)</th>
+              <th>Size Reduction</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>PG005</strong></td>
+              <td>conv2d (2D convolution)</td>
+              <td><code>S02 [simplifycfg, instcombine]</code></td>
+              <td>636 B</td>
+              <td>636 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">346 B</td>
+              <td>346 B</td>
+              <td class="text-green" style="font-weight:bold;">+45.60%</td>
+              <td><span class="badge badge-win">WIN (Oracle Match)</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG010</strong></td>
+              <td>quicksort</td>
+              <td><code>S16 [sroa, instcombine, dce]</code></td>
+              <td>315 B</td>
+              <td>315 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">315 B</td>
+              <td>315 B</td>
+              <td>0.00%</td>
+              <td><span class="badge badge-tie">TIED (Oracle Match)</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG015</strong></td>
+              <td>tree_traverse (Recursion)</td>
+              <td><code>S05 [gvn, dce]</code></td>
+              <td>102 B</td>
+              <td>102 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">102 B</td>
+              <td>102 B</td>
+              <td>0.00%</td>
+              <td><span class="badge badge-tie">TIED (Oracle Match)</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG020</strong></td>
+              <td>horner_eval (Polynomial)</td>
+              <td><code>S04 [sroa, dce]</code></td>
+              <td>256 B</td>
+              <td>256 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">187 B</td>
+              <td>144 B</td>
+              <td class="text-green" style="font-weight:bold;">+26.95%</td>
+              <td><span class="badge badge-win">WIN</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG026</strong></td>
+              <td>str_search (String Search)</td>
+              <td><code>S05 [gvn, dce]</code></td>
+              <td>145 B</td>
+              <td>145 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">145 B</td>
+              <td>145 B</td>
+              <td>0.00%</td>
+              <td><span class="badge badge-tie">TIED (Oracle Match)</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG035</strong></td>
+              <td>decision_tree (Control Flow)</td>
+              <td><code>S04 [sroa, dce]</code></td>
+              <td>160 B</td>
+              <td>160 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">160 B</td>
+              <td>160 B</td>
+              <td>0.00%</td>
+              <td><span class="badge badge-tie">TIED (Oracle Match)</span></td>
+            </tr>
+            <tr>
+              <td><strong>PG040</strong></td>
+              <td>knapsack (Dynamic Prog)</td>
+              <td><code>S02 [simplifycfg, instcombine]</code></td>
+              <td>294 B</td>
+              <td>294 B</td>
+              <td style="color:#38bdf8; font-weight:bold;">294 B</td>
+              <td>294 B</td>
+              <td>0.00%</td>
+              <td><span class="badge badge-tie">TIED (Oracle Match)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Bar Chart
+    const ctx = document.getElementById('sizeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['PG005 conv2d', 'PG010 quicksort', 'PG015 tree_traverse', 'PG020 horner_eval', 'PG026 str_search', 'PG035 decision_tree', 'PG040 knapsack'],
+        datasets: [
+          {
+            label: 'LLVM -O2 / -Oz',
+            data: [636, 315, 102, 256, 145, 160, 294],
+            backgroundColor: '#ef4444'
+          },
+          {
+            label: 'ML Predicted',
+            data: [346, 315, 102, 187, 145, 160, 294],
+            backgroundColor: '#38bdf8'
+          },
+          {
+            label: 'Oracle (Best)',
+            data: [346, 315, 102, 144, 145, 160, 294],
+            backgroundColor: '#10b981'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#334155' },
+            ticks: { color: '#94a3b8' }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#94a3b8' }
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#f8fafc' } }
+        }
+      }
+    });
+
+    // Donut Chart
+    const ctx2 = document.getElementById('winChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Strict Wins (ML Smaller)', 'Ties (ML Matches -O2)', 'Losses (ML Larger)'],
+        datasets: [{
+          data: [2, 5, 0],
+          backgroundColor: ['#10b981', '#38bdf8', '#ef4444'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#f8fafc' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

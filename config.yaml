@@ -1,0 +1,63 @@
+# LLVM ML Pass Ordering / Selection Configuration
+# Target: 70% Implementation Milestone
+
+project:
+  name: "LLVM ML Pass Ordering / Selection"
+  version: "0.1.0"
+  description: "A lightweight machine-learning model that predicts LLVM optimization pass sequences from program IR features"
+
+environment:
+  # LLVM 23.1.2 is installed at C:\Program Files\LLVM\bin
+  # Note: LLVM 23 does NOT ship standalone opt.exe - we use clang directly
+  clang_path: "C:\\Program Files\\LLVM\\bin\\clang.exe"
+  opt_path: "auto"       # Will be unavailable in LLVM 23; clang is used instead
+  llvm_size_path: "C:\\Program Files\\LLVM\\bin\\llvm-size.exe"
+  llvm_dis_path: "auto"
+  target_triple: "x86_64-w64-mingw32"
+  extra_clang_flags: ["-O0", "-Xclang", "-disable-O0-optnone", "--target=x86_64-w64-mingw32"]
+
+benchmarks:
+  train_dir: "benchmarks/train"
+  test_dir: "benchmarks/test"
+  metadata_file: "benchmarks/metadata/manifest.json"
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+
+features:
+  ir_dir: "ir"
+  features_file: "features/ir_features.csv"
+  normalization: true
+
+candidates:
+  definition_file: "candidates/candidates.json"
+  max_sequence_length: 4
+  compilation_budget_per_program: 30
+
+experiments:
+  output_dir: "experiments"
+  results_cache: "experiments/results_cache.json"
+  measure_time: true
+  size_metric: "text_section" # "text_section" (.text size in bytes via llvm-size) or "file_size"
+
+dataset:
+  train_dataset_file: "dataset/dataset_train.csv"
+  test_dataset_file: "dataset/dataset_test.csv"
+  full_dataset_file: "dataset/dataset_all.csv"
+  all_experiments_file: "dataset/experiments_all.csv"
+
+ml:
+  model_type: "random_forest" # options: "random_forest", "hist_gradient_boosting"
+  model_dir: "models"
+  model_filename: "rf_pass_predictor.joblib"
+  random_state: 42
+  n_estimators: 100
+  max_depth: 12
+  top_k: 3
+
+evaluation:
+  results_dir: "results"
+  tables_dir: "results/tables"
+  plots_dir: "results/plots"
+  baselines: ["O2", "Oz"]

@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Predict Best Sequence (PG005)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/predict.py",
+            "args": [
+                "--source",
+                "benchmarks/test/PG005_conv2d.c"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Evaluate Test Suite vs -O2 / -Oz",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/evaluate.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Run Automated Tests",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/run_tests.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

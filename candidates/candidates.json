@@ -1,0 +1,581 @@
+[
+  {
+    "id": "O2",
+    "pipeline": "default<O2>",
+    "passes": [
+      "default<O2>"
+    ],
+    "length": 1,
+    "is_baseline": true,
+    "description": "LLVM Standard Optimization Pipeline (-O2)",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "OZ",
+    "pipeline": "default<Oz>",
+    "passes": [
+      "default<Oz>"
+    ],
+    "length": 1,
+    "is_baseline": true,
+    "description": "LLVM Code Size Optimization Pipeline (-Oz)",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S01",
+    "pipeline": "instcombine,simplifycfg",
+    "passes": [
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S02",
+    "pipeline": "simplifycfg,instcombine",
+    "passes": [
+      "simplifycfg",
+      "instcombine"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: simplifycfg,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S03",
+    "pipeline": "sroa,instcombine",
+    "passes": [
+      "sroa",
+      "instcombine"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S04",
+    "pipeline": "sroa,dce",
+    "passes": [
+      "sroa",
+      "dce"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S05",
+    "pipeline": "gvn,dce",
+    "passes": [
+      "gvn",
+      "dce"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: gvn,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S06",
+    "pipeline": "early-cse,simplifycfg",
+    "passes": [
+      "early-cse",
+      "simplifycfg"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: early-cse,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S07",
+    "pipeline": "sccp,simplifycfg",
+    "passes": [
+      "sccp",
+      "simplifycfg"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: sccp,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S08",
+    "pipeline": "jump-threading,simplifycfg",
+    "passes": [
+      "jump-threading",
+      "simplifycfg"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: jump-threading,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S09",
+    "pipeline": "reassociate,instcombine",
+    "passes": [
+      "reassociate",
+      "instcombine"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: reassociate,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S10",
+    "pipeline": "loop-simplify,instcombine",
+    "passes": [
+      "loop-simplify",
+      "instcombine"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: loop-simplify,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S11",
+    "pipeline": "loop-rotate,licm",
+    "passes": [
+      "loop-rotate",
+      "licm"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: loop-rotate,licm",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S12",
+    "pipeline": "mem2reg,instcombine",
+    "passes": [
+      "mem2reg",
+      "instcombine"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: mem2reg,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S13",
+    "pipeline": "mem2reg,sroa",
+    "passes": [
+      "mem2reg",
+      "sroa"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: mem2reg,sroa",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S14",
+    "pipeline": "globaldce,constmerge",
+    "passes": [
+      "globaldce",
+      "constmerge"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: globaldce,constmerge",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S15",
+    "pipeline": "instcombine,dce",
+    "passes": [
+      "instcombine",
+      "dce"
+    ],
+    "length": 2,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S16",
+    "pipeline": "sroa,instcombine,simplifycfg",
+    "passes": [
+      "sroa",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S17",
+    "pipeline": "sroa,instcombine,dce",
+    "passes": [
+      "sroa",
+      "instcombine",
+      "dce"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S18",
+    "pipeline": "simplifycfg,instcombine,simplifycfg",
+    "passes": [
+      "simplifycfg",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: simplifycfg,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S19",
+    "pipeline": "instcombine,gvn,dce",
+    "passes": [
+      "instcombine",
+      "gvn",
+      "dce"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,gvn,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S20",
+    "pipeline": "early-cse,instcombine,simplifycfg",
+    "passes": [
+      "early-cse",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: early-cse,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S21",
+    "pipeline": "sccp,instcombine,simplifycfg",
+    "passes": [
+      "sccp",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sccp,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S22",
+    "pipeline": "sroa,gvn,dce",
+    "passes": [
+      "sroa",
+      "gvn",
+      "dce"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,gvn,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S23",
+    "pipeline": "loop-simplify,loop-rotate,licm",
+    "passes": [
+      "loop-simplify",
+      "loop-rotate",
+      "licm"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: loop-simplify,loop-rotate,licm",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S24",
+    "pipeline": "loop-rotate,licm,simplifycfg",
+    "passes": [
+      "loop-rotate",
+      "licm",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: loop-rotate,licm,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S25",
+    "pipeline": "jump-threading,instcombine,simplifycfg",
+    "passes": [
+      "jump-threading",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: jump-threading,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S26",
+    "pipeline": "instcombine,reassociate,instcombine",
+    "passes": [
+      "instcombine",
+      "reassociate",
+      "instcombine"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,reassociate,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S27",
+    "pipeline": "mem2reg,instcombine,dce",
+    "passes": [
+      "mem2reg",
+      "instcombine",
+      "dce"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: mem2reg,instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S28",
+    "pipeline": "sroa,early-cse,simplifycfg",
+    "passes": [
+      "sroa",
+      "early-cse",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,early-cse,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S29",
+    "pipeline": "sroa,sccp,dce",
+    "passes": [
+      "sroa",
+      "sccp",
+      "dce"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,sccp,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S30",
+    "pipeline": "instcombine,bdce,simplifycfg",
+    "passes": [
+      "instcombine",
+      "bdce",
+      "simplifycfg"
+    ],
+    "length": 3,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,bdce,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S31",
+    "pipeline": "sroa,instcombine,gvn,dce",
+    "passes": [
+      "sroa",
+      "instcombine",
+      "gvn",
+      "dce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,instcombine,gvn,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S32",
+    "pipeline": "sroa,simplifycfg,instcombine,simplifycfg",
+    "passes": [
+      "sroa",
+      "simplifycfg",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,simplifycfg,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S33",
+    "pipeline": "mem2reg,sroa,instcombine,simplifycfg",
+    "passes": [
+      "mem2reg",
+      "sroa",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: mem2reg,sroa,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S34",
+    "pipeline": "early-cse,sroa,instcombine,dce",
+    "passes": [
+      "early-cse",
+      "sroa",
+      "instcombine",
+      "dce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: early-cse,sroa,instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S35",
+    "pipeline": "loop-simplify,loop-rotate,licm,instcombine",
+    "passes": [
+      "loop-simplify",
+      "loop-rotate",
+      "licm",
+      "instcombine"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: loop-simplify,loop-rotate,licm,instcombine",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S36",
+    "pipeline": "sccp,simplifycfg,instcombine,dce",
+    "passes": [
+      "sccp",
+      "simplifycfg",
+      "instcombine",
+      "dce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: sccp,simplifycfg,instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S37",
+    "pipeline": "jump-threading,simplifycfg,instcombine,dce",
+    "passes": [
+      "jump-threading",
+      "simplifycfg",
+      "instcombine",
+      "dce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: jump-threading,simplifycfg,instcombine,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S38",
+    "pipeline": "sroa,reassociate,instcombine,simplifycfg",
+    "passes": [
+      "sroa",
+      "reassociate",
+      "instcombine",
+      "simplifycfg"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,reassociate,instcombine,simplifycfg",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S39",
+    "pipeline": "instcombine,simplifycfg,gvn,dce",
+    "passes": [
+      "instcombine",
+      "simplifycfg",
+      "gvn",
+      "dce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: instcombine,simplifycfg,gvn,dce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  },
+  {
+    "id": "S40",
+    "pipeline": "sroa,early-cse,instcombine,adce",
+    "passes": [
+      "sroa",
+      "early-cse",
+      "instcombine",
+      "adce"
+    ],
+    "length": 4,
+    "is_baseline": false,
+    "description": "Custom pipeline: sroa,early-cse,instcombine,adce",
+    "validated": null,
+    "validation_msg": "Pending LLVM validation"
+  }
+]
