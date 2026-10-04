@@ -1,0 +1,57 @@
+name: LLVM ML Pass Pipeline CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-evaluate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install LLVM & Clang
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang llvm llvm-dev
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Environment Check
+      run: |
+        python scripts/check_environment.py
+
+    - name: Run Automated Unit Tests
+      run: |
+        python scripts/run_tests.py
+
+    - name: Run Live Prediction on PG005 (conv2d)
+      run: |
+        python scripts/predict.py --source benchmarks/test/PG005_conv2d.c
+
+    - name: Run Test Suite Evaluation vs -O2 / -Oz
+      run: |
+        python scripts/evaluate.py
+
+    - name: Upload Evaluation Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: evaluation-results
+        path: |
+          results/tables/
+          results/plots/
+          results/dashboard.html
