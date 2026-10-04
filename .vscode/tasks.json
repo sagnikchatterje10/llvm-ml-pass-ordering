@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "1. Run Prediction (PG005_conv2d)",
+            "label": "1. Predict Best Sequence (PG005_conv2d)",
             "type": "shell",
             "command": "python scripts/predict.py --source benchmarks/test/PG005_conv2d.c",
             "problemMatcher": [],
@@ -17,7 +17,7 @@
             }
         },
         {
-            "label": "2. Evaluate All Test Benchmarks",
+            "label": "2. Evaluate All Test Benchmarks vs -O2 / -Oz",
             "type": "shell",
             "command": "python scripts/evaluate.py",
             "problemMatcher": [],
@@ -28,9 +28,24 @@
             }
         },
         {
-            "label": "3. Run Automated Unit Tests",
+            "label": "3. Run Automated Unit Tests (5/5 passing)",
             "type": "shell",
             "command": "python scripts/run_tests.py",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        },
+        {
+            "label": "4. Check Toolchain Environment (Clang, Opt, Python)",
+            "type": "shell",
+            "command": "python scripts/check_environment.py",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
@@ -39,14 +54,47 @@
             }
         },
         {
-            "label": "4. Check Toolchain Environment",
+            "label": "5. Train ML Models (RandomForest & HistGB)",
             "type": "shell",
-            "command": "python scripts/check_environment.py",
+            "command": "python scripts/train_model.py",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
                 "panel": "new",
                 "focus": true
+            }
+        },
+        {
+            "label": "6. Extract 30 Static IR Features",
+            "type": "shell",
+            "command": "python scripts/extract_features.py",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            }
+        },
+        {
+            "label": "7. Open Interactive Dashboard in Browser",
+            "type": "shell",
+            "command": "Start-Process \"results/dashboard.html\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false
+            }
+        },
+        {
+            "label": "8. Open 70% Milestone PDF Report",
+            "type": "shell",
+            "command": "Start-Process \"LLVM_ML_Pass_Ordering_Practical_Demonstration_and_Evaluation_Report.pdf\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": false
             }
         }
     ]
