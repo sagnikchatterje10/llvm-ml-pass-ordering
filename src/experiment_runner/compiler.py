@@ -82,11 +82,11 @@ class LLVMCompiler:
                  opt_path: Optional[str] = None,
                  llvm_size_path: Optional[str] = None,
                  extra_clang_flags: Optional[List[str]] = None):
-        self.clang = clang_path or self._resolve_tool("clang")
-        # opt is optional - we'll use clang if opt is unavailable
-        self.opt = opt_path or self._resolve_tool("opt")
-        self.llvm_size = llvm_size_path or self._resolve_tool("llvm-size")
-        # Flags for generating unoptimized IR
+        self.clang = clang_path if (clang_path and os.path.isfile(clang_path)) else self._resolve_tool("clang")
+        self.opt = opt_path if (opt_path and os.path.isfile(opt_path)) else self._resolve_tool("opt")
+        self.llvm_size = llvm_size_path if (llvm_size_path and os.path.isfile(llvm_size_path)) else self._resolve_tool("llvm-size")
+        # Target flag: only needed on Windows to link against mingw headers if available
+        self.target_flag = ["--target=x86_64-w64-mingw32"] if sys.platform == "win32" else []
         self.ir_gen_flags = ["-S", "-emit-llvm", "-O0", "-Xclang", "-disable-O0-optnone"]
 
     @staticmethod
@@ -130,9 +130,8 @@ class LLVMCompiler:
         out_path = Path(output_ll_path)
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        cmd = [self.clang, "-S", "-emit-llvm", "-O0", "-Xclang", "-disable-O0-optnone",
-               "--target=x86_64-w64-mingw32",
-               str(source_path), "-o", str(out_path)]
+        cmd = [self.clang, "-S", "-emit-llvm", "-O0", "-Xclang", "-disable-O0-optnone"] + \
+               self.target_flag + [str(source_path), "-o", str(out_path)]
         try:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
             if res.returncode != 0:
@@ -168,7 +167,7 @@ class LLVMCompiler:
         if not obj_path.endswith(".o"):
             obj_path = str(out_path) + ".o"
 
-        cmd = [self.clang, "--target=x86_64-w64-mingw32"] + clang_flags + ["-c", str(input_ll), "-o", obj_path]
+        cmd = [self.clang] + self.target_flag + clang_flags + ["-c", str(input_ll), "-o", obj_path]
 
         start_t = time.perf_counter()
         try:

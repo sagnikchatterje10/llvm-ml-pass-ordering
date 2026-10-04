@@ -7,14 +7,13 @@ project:
   description: "A lightweight machine-learning model that predicts LLVM optimization pass sequences from program IR features"
 
 environment:
-  # LLVM 23.1.2 is installed at C:\Program Files\LLVM\bin
-  # Note: LLVM 23 does NOT ship standalone opt.exe - we use clang directly
-  clang_path: "C:\\Program Files\\LLVM\\bin\\clang.exe"
-  opt_path: "auto"       # Will be unavailable in LLVM 23; clang is used instead
-  llvm_size_path: "C:\\Program Files\\LLVM\\bin\\llvm-size.exe"
+  # 'auto' automatically detects Clang & llvm-size on Windows and Linux CI
+  clang_path: "auto"
+  opt_path: "auto"
+  llvm_size_path: "auto"
   llvm_dis_path: "auto"
-  target_triple: "x86_64-w64-mingw32"
-  extra_clang_flags: ["-O0", "-Xclang", "-disable-O0-optnone", "--target=x86_64-w64-mingw32"]
+  target_triple: "auto"
+  extra_clang_flags: ["-O0", "-Xclang", "-disable-O0-optnone"]
 
 benchmarks:
   train_dir: "benchmarks/train"
