@@ -316,7 +316,8 @@
   </ul>
 
   <h3>Step 2: Benchmark Suite & Zero-Leakage Dataset Splitting</h3>
-  <div class="code-block">cat benchmarks/metadata/manifest.json</div>
+  <div class="code-block">python scripts/init_benchmarks.py
+# Or to view manifest in PowerShell: Get-Content benchmarks\metadata\manifest.json</div>
   <ul>
     <li><strong>What the Demonstration Shows:</strong> 40 diverse C benchmarks across 9 distinct algorithmic categories: <em>arrays_loops, sorting, searching, recursion, arithmetic, bitwise_logic, string_processing, memory_structures, and control_flow</em>.</li>
     <li><strong>Partitioning:</strong> 27 Train (67.5%), 6 Validation (15%), 7 Held-Out Test (17.5%). Programs are partitioned at the file level so test code is completely unseen.</li>
